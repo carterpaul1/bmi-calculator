@@ -1,7 +1,7 @@
 {
   "name": "bmi-calculator",
   "version": "0.1.0",
-  "homepage": "https://carterpaul1.github.io/react_projects",
+  "homepage": "https://carterpaul1.github.io/bmi-calculator",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -15,7 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-	"deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -43,6 +43,7 @@
     "@babel/plugin-transform-numeric-separator": "^7.24.7",
     "@babel/plugin-transform-optional-chaining": "^7.24.7",
     "@babel/plugin-transform-private-methods": "^7.24.7",
+    "gh-pages": "^6.1.1",
     "rimraf": "^4.4.1"
   }
 }
