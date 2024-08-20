@@ -7,8 +7,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>BMI Calculator</h1>
-        <BMICalculator />
       </header>
+	  <main>
+		<BMICalculator />
+	  </main>
     </div>
   );
 }

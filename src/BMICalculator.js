@@ -9,10 +9,21 @@ const BMICalculator = () => {
 
   const calculateBMI = (e) => {
     e.preventDefault();
-    const heightInInches = parseInt(feet) * 12 + parseInt(inches);
-    if (weight > 0 && heightInInches > 0) {
+    const parsedWeight = parseFloat(weight);
+    const parsedFeet = parseInt(feet);
+    const parsedInches = parseInt(inches);
+
+    if (isNaN(parsedWeight) || isNaN(parsedFeet) || isNaN(parsedInches) ||
+      parsedWeight <= 0 || parsedFeet <= 0 || parsedInches < 0) {
+      setBmi(null);
+      setMessage('Please enter a valid positive number for weight and height.');
+      return;
+    }
+
+    const heightInInches = parsedFeet * 12 + parsedInches;
+    if (parsedWeight > 0 && heightInInches > 0) {
       const heightInMeters = heightInInches * 0.0254; // Convert height to meters
-      const weightInKg = weight * 0.453592; // Convert weight to kg
+      const weightInKg = parsedWeight * 0.453592; // Convert weight to kg
       const bmiValue = (weightInKg / (heightInMeters * heightInMeters)).toFixed(2);
       setBmi(bmiValue);
       setMessage(getBMIMessage(bmiValue));
@@ -35,49 +46,59 @@ const BMICalculator = () => {
   };
 
   return (
-    <div className="bmi-calculator">
-      <h2>BMI Calculator</h2>
-      <form onSubmit={calculateBMI}>
-        <div>
-          <label>
-            Weight (lbs):
-            <input
-              type="number"
-              value={weight}
-              onChange={(e) => setWeight(e.target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Height:
-            <div>
+    <div className="form-container">
+      <img src={`${process.env.PUBLIC_URL}/scale.jfif`} alt="scale" className="left-image" />
+      <div className="bmi-calculator">
+        <h3>Please enter your weight and height to find your BMI</h3>
+        <form onSubmit={calculateBMI}>
+          <div>
+            <label>
+              Weight
               <input
                 type="number"
-                placeholder="Feet"
-                value={feet}
-                onChange={(e) => setFeet(e.target.value)}
-                style={{ marginRight: '10px' }}
+				placeholder="lbs"
+                value={weight}
+                onChange={(e) => setWeight(e.target.value)}
               />
-              <input
-                type="number"
-                placeholder="Inches"
-                value={inches}
-                onChange={(e) => setInches(e.target.value)}
-              />
-            </div>
-          </label>
-        </div>
-        <button type="submit">Calculate BMI</button>
-      </form>
-      {bmi && (
-        <div>
-          <h3>Your BMI: {bmi}</h3>
-          <p>{message}</p>
-        </div>
-      )}
+            </label>
+          </div>
+          <div>
+            <label>
+              Height 
+              <div>
+                <input
+                  type="number"
+                  placeholder="Feet"
+                  value={feet}
+                  onChange={(e) => setFeet(e.target.value)}
+                  style={{ marginRight: '10px' }}
+                />
+                <input
+                  type="number"
+                  placeholder="Inches"
+                  value={inches}
+                  onChange={(e) => setInches(e.target.value)}
+                />
+              </div>
+            </label>
+          </div>
+          <button type="submit">Calculate BMI</button>
+        </form>
+        {bmi && (
+          <div>
+            <h3>Your BMI: {bmi}</h3>
+            <p>{message}</p>
+          </div>
+        )}
+        {message && !bmi && (
+          <div>
+            <p>{message}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
 export default BMICalculator;
+
