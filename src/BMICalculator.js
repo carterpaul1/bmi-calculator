@@ -52,21 +52,22 @@ const BMICalculator = () => {
         <h3>Please enter your weight and height to find your BMI</h3>
         <form onSubmit={calculateBMI}>
           <div>
-            <label>
-              Weight
+            <label htmlFor="weight">Weight</label>
               <input
+			  id="weight"
+			  name="weight"
                 type="number"
 				placeholder="lbs"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
               />
-            </label>
           </div>
           <div>
-            <label>
-              Height 
+            <label htmlFor="height-feet">Height</label>
               <div>
                 <input
+				id="height-feet"
+				name="feet"
                   type="number"
                   placeholder="Feet"
                   value={feet}
@@ -74,13 +75,14 @@ const BMICalculator = () => {
                   style={{ marginRight: '10px' }}
                 />
                 <input
+				id="height-inches"
+				name="inches"
                   type="number"
                   placeholder="Inches"
                   value={inches}
                   onChange={(e) => setInches(e.target.value)}
                 />
               </div>
-            </label>
           </div>
           <button type="submit">Calculate BMI</button>
         </form>
